@@ -1,0 +1,27 @@
+{
+  "name": "claim-documents-index",
+  "fields": [
+    { "name": "id", "type": "Edm.String", "key": true, "searchable": false, "filterable": false, "retrievable": true },
+    { "name": "content", "type": "Edm.String", "searchable": true, "retrievable": true, "analyzer": "ja.microsoft" },
+
+    { "name": "claim_id", "type": "Edm.String", "searchable": false, "filterable": true, "sortable": true, "retrievable": true },
+    { "name": "claim_number", "type": "Edm.String", "searchable": true, "filterable": true, "sortable": true, "facetable": true, "retrievable": true },
+    { "name": "received_date", "type": "Edm.DateTimeOffset", "filterable": true, "sortable": true, "facetable": true, "retrievable": true },
+    { "name": "customer_name", "type": "Edm.String", "searchable": true, "filterable": true, "sortable": true, "facetable": true, "retrievable": true, "analyzer": "ja.microsoft" },
+    { "name": "product_name", "type": "Edm.String", "searchable": true, "filterable": true, "sortable": true, "facetable": true, "retrievable": true, "analyzer": "ja.microsoft" },
+    { "name": "lot_number", "type": "Edm.String", "searchable": true, "filterable": true, "sortable": true, "retrievable": true },
+    { "name": "claim_category", "type": "Edm.String", "searchable": true, "filterable": true, "facetable": true, "retrievable": true, "analyzer": "ja.microsoft" },
+    { "name": "severity", "type": "Edm.String", "searchable": false, "filterable": true, "facetable": true, "retrievable": true },
+    { "name": "incident_date", "type": "Edm.DateTimeOffset", "filterable": true, "sortable": true, "facetable": true, "retrievable": true },
+    { "name": "incident_summary", "type": "Edm.String", "searchable": true, "retrievable": true, "analyzer": "ja.microsoft" },
+    { "name": "status", "type": "Edm.String", "searchable": false, "filterable": true, "facetable": true, "retrievable": true },
+    { "name": "document_type", "type": "Edm.String", "searchable": false, "filterable": true, "facetable": true, "retrievable": true },
+    { "name": "file_name", "type": "Edm.String", "searchable": true, "filterable": true, "retrievable": true, "analyzer": "ja.microsoft" },
+
+    { "name": "metadata_storage_name", "type": "Edm.String", "searchable": false, "filterable": true, "retrievable": true },
+    { "name": "metadata_storage_path", "type": "Edm.String", "searchable": false, "filterable": true, "retrievable": true },
+    { "name": "metadata_storage_content_type", "type": "Edm.String", "searchable": false, "filterable": true, "facetable": true, "retrievable": true },
+    { "name": "metadata_storage_size", "type": "Edm.Int64", "filterable": true, "sortable": true, "retrievable": true },
+    { "name": "metadata_storage_last_modified", "type": "Edm.DateTimeOffset", "filterable": true, "sortable": true, "retrievable": true }
+  ]
+}

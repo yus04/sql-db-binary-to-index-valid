@@ -1,0 +1,11 @@
+{
+  "name": "claim-documents-ds",
+  "description": "Functions がアップロードしたクレーム資料 (Blob + メタデータ)",
+  "type": "azureblob",
+  "credentials": {
+    "connectionString": "ResourceId=__STORAGE_ACCOUNT_ID__;"
+  },
+  "container": {
+    "name": "__CONTAINER_NAME__"
+  }
+}

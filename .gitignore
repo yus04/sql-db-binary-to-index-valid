@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.python_packages/
+
+# Azure Functions
+src/function/local.settings.json
+bin/
+obj/
+
+# Bicep build output
+infra/*.json
+
+# OS / editor
+.DS_Store
+.vscode/

@@ -1,0 +1,38 @@
+{
+  "name": "claim-documents-indexer",
+  "description": "Blob 本文 (PDF/Word/Excel) とカスタムメタデータ (クレーム情報) をインデックス化する",
+  "dataSourceName": "claim-documents-ds",
+  "targetIndexName": "claim-documents-index",
+  "schedule": {
+    "interval": "PT5M"
+  },
+  "parameters": {
+    "configuration": {
+      "dataToExtract": "contentAndMetadata",
+      "parsingMode": "default",
+      "indexedFileNameExtensions": ".pdf,.docx,.xlsx",
+      "failOnUnsupportedContentType": false,
+      "failOnUnprocessableDocument": false,
+      "indexStorageMetadataOnlyForOversizedDocuments": true
+    }
+  },
+  "fieldMappings": [
+    { "sourceFieldName": "metadata_storage_path", "targetFieldName": "id", "mappingFunction": { "name": "base64Encode" } },
+    { "sourceFieldName": "metadata_storage_path", "targetFieldName": "metadata_storage_path" },
+
+    { "sourceFieldName": "claim_id", "targetFieldName": "claim_id" },
+    { "sourceFieldName": "received_date", "targetFieldName": "received_date" },
+    { "sourceFieldName": "incident_date", "targetFieldName": "incident_date" },
+
+    { "sourceFieldName": "claim_number", "targetFieldName": "claim_number", "mappingFunction": { "name": "urlDecode" } },
+    { "sourceFieldName": "customer_name", "targetFieldName": "customer_name", "mappingFunction": { "name": "urlDecode" } },
+    { "sourceFieldName": "product_name", "targetFieldName": "product_name", "mappingFunction": { "name": "urlDecode" } },
+    { "sourceFieldName": "lot_number", "targetFieldName": "lot_number", "mappingFunction": { "name": "urlDecode" } },
+    { "sourceFieldName": "claim_category", "targetFieldName": "claim_category", "mappingFunction": { "name": "urlDecode" } },
+    { "sourceFieldName": "severity", "targetFieldName": "severity", "mappingFunction": { "name": "urlDecode" } },
+    { "sourceFieldName": "incident_summary", "targetFieldName": "incident_summary", "mappingFunction": { "name": "urlDecode" } },
+    { "sourceFieldName": "status", "targetFieldName": "status", "mappingFunction": { "name": "urlDecode" } },
+    { "sourceFieldName": "document_type", "targetFieldName": "document_type", "mappingFunction": { "name": "urlDecode" } },
+    { "sourceFieldName": "file_name", "targetFieldName": "file_name", "mappingFunction": { "name": "urlDecode" } }
+  ]
+}
