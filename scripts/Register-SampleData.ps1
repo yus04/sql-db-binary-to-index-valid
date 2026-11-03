@@ -40,20 +40,20 @@ ELSE
 
 # パラメーター名, 型, サイズ (-1 = MAX)
 $parameterDefinitions = @(
-    @('ClaimNumber', 'NVarChar', 20)
-    @('ReceivedDate', 'Date', 0)
-    @('CustomerName', 'NVarChar', 100)
-    @('ProductName', 'NVarChar', 100)
-    @('LotNumber', 'NVarChar', 50)
-    @('ClaimCategory', 'NVarChar', 50)
-    @('Severity', 'NVarChar', 10)
-    @('IncidentDate', 'Date', 0)
-    @('IncidentSummary', 'NVarChar', 1000)
-    @('Status', 'NVarChar', 20)
-    @('DocumentType', 'NVarChar', 20)
-    @('FileName', 'NVarChar', 260)
-    @('ContentType', 'NVarChar', 100)
-    @('FileData', 'VarBinary', -1)
+    , @('ClaimNumber', 'NVarChar', 20)
+    , @('ReceivedDate', 'Date', 0)
+    , @('CustomerName', 'NVarChar', 100)
+    , @('ProductName', 'NVarChar', 100)
+    , @('LotNumber', 'NVarChar', 50)
+    , @('ClaimCategory', 'NVarChar', 50)
+    , @('Severity', 'NVarChar', 10)
+    , @('IncidentDate', 'Date', 0)
+    , @('IncidentSummary', 'NVarChar', 1000)
+    , @('Status', 'NVarChar', 20)
+    , @('DocumentType', 'NVarChar', 20)
+    , @('FileName', 'NVarChar', 260)
+    , @('ContentType', 'NVarChar', 100)
+    , @('FileData', 'VarBinary', -1)
 )
 
 $connection = Open-SqlConnection -ServerFqdn $outputs.sqlServerFqdn -DatabaseName $outputs.sqlDatabaseName
@@ -76,7 +76,9 @@ try {
         foreach ($definition in $parameterDefinitions) {
             $name, $type, $size = $definition
             $parameter = $command.Parameters.Add("@$name", [System.Data.SqlDbType]$type, $size)
-            $parameter.Value = if ($null -eq $values[$name]) { [DBNull]::Value } else { $values[$name] }
+            # if 式の出力は列挙されて byte[] が Object[] になるため、文の中で代入する
+            if ($null -eq $values[$name]) { $parameter.Value = [DBNull]::Value }
+            else { $parameter.Value = $values[$name] }
         }
 
         $claimId = $command.ExecuteScalar()
